@@ -5,13 +5,13 @@ const config = require('./config.js');
 
 
 module.exports = {
-    
+
     _initDB:function(){
         var lv_db = this.openDBConnection();
         lv_db.serialize(function() {
             var qry = _config.db.recTabCreate;
             console.log(qry);
-           lv_db.run(qry); 
+           lv_db.run(qry);
         });
         this.closeDBConnection(lv_db);
     },
@@ -73,7 +73,7 @@ module.exports = {
             this.closeDBConnection(lv_db);
         }
     },
-    
+
     sayHello : function () {
         console.log("hello");
     }

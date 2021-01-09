@@ -1,7 +1,6 @@
 
 const express = require('express')
 const app = express()
-const db = require('./database.js')
 const ts = require('./trackerService.js')
 const port = 3000
 
@@ -53,4 +52,3 @@ app.get('/usrs',(req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
-
