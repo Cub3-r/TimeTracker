@@ -23,3 +23,8 @@ npm install md5
 static files like javascript and communcation with nodejs
 https://expressjs.com/de/starter/static-files.html
 https://gist.github.com/aerrity/fd393e5511106420fba0c9602cc05d35
+
+
+JS Snippets
+
+https://jsfiddle.net/lesson8/jWAJ7/
