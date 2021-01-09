@@ -3,12 +3,17 @@ const express = require('express')
 const app = express()
 const ts = require('./trackerService.js')
 const port = 3000
+const path = require('path')
+
+app.use(express.static('public'))
+app.post('/sample',(req, res) => {
+  console.log("some action");
+})
+
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-  ts.sayHello()
-  ts.sayHelloWithMyName("Tester")
-  ts._initDB();
+  // sending the html page
+  res.sendFile(path.join(__dirname+ '/public/test.html'))
 })
 
 app.get('/start',(req, res) => {
@@ -47,6 +52,10 @@ app.get('/usrs',(req, res) => {
       })
     });
  })
+ app.get('/end',(req, res) => {
+   ts.endTrack(parseInt("5"));
+  })
+
 
 
 app.listen(port, () => {

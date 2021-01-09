@@ -37,7 +37,7 @@ module.exports = {
     * @return: The converted Date as an integer value.
     */
     getIntegerTime: function(oJSDate){
-      if(oJSDate !== undefined && (oJSDate instanceOf Date))
+      if(oJSDate !== undefined && (oJSDate instanceof Date))
         return oJSDate.getTime();
       return 0;
     },
@@ -78,14 +78,14 @@ module.exports = {
     createNewEntry : function(oTopic, oUser, oJSDate){
       var lv_successfully = false;
         // Adding only a new entry with valid params
-        if (oTopic !== undefined && oUser !== undefined && oStart !== undefined) {
+        if (oTopic !== undefined && oUser !== undefined && oJSDate !== undefined) {
           var lv_db = openDBConnection();
           var lv_qry = _config.db.recTabInsertStart;
           console.log("------- input params -------");
           console.log("--oTopic       ------ " + oTopic);
           console.log("--oUser       ------ " + oUser);
           console.log("--oJsDate      ------ " + oJSDate);
-          console.log("--IntegerTime  ------ " + )getIntegerTime(oJsDate);
+          console.log("--IntegerTime  ------ " + getIntegerTime(oJsDate) );
           lv_db.run(lv_qry,[oTopic,oUser,oStart,getIntegerTime(oJsDate)]);
           this.closeDBConnection(lv_db);
           lv_successfully = true;
@@ -173,10 +173,10 @@ module.exports = {
     * Ends a track
     * @param {Integer} oTrackId The Id of the time track.
     */
-    endTrack : function(oTrackId{
+    endTrack : function(oTrackId){
       return this.updateEntry(oTrackId,undefined,undefined,undefined,new Date().getTime(),undefined);
     },
-    
+
     sayHello : function () {
         console.log("hello");
     }

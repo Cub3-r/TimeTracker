@@ -18,3 +18,8 @@ For the setting up of the sqlite3 and md5 libraries in npm you need
 https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
 npm install sqlite3@5.0.0
 npm install md5
+
+
+static files like javascript and communcation with nodejs
+https://expressjs.com/de/starter/static-files.html
+https://gist.github.com/aerrity/fd393e5511106420fba0c9602cc05d35
