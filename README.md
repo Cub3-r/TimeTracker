@@ -1,2 +1,0 @@
-# TimeTracker
-# A wonderful TimeTracker 
