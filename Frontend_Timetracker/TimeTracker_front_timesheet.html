@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- CSS -->
+    <link href="css/bootstrap-toggle.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/dashboard.css" rel="stylesheet" type="text/css">
     <link href="css/all.min.css" rel="stylesheet" type="text/css">
     <link href="css/datable01.css" rel="stylesheet" type="text/css">
     <link href="css/datatable02.css" rel="stylesheet" type="text/css">
+
 
   </head>
   <body>
@@ -21,7 +23,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -32,6 +34,15 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
+          </br>
+
+            <!-- Sidebar Message -->
+            <div class="sidebar-card">
+              <input type="checkbox" checked data-toggle="toggle" data-on="Start work!" data-off="Feierabend!" data-onstyle="success" data-offstyle="danger">
+            </div>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
@@ -47,13 +58,6 @@
                 <a class="nav-link" href="TimeTracker_front_timesheet.html">
                     <span>Timesheet</span></a>
             </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card">
-                <p class="text-center mb-2">Awesome TimeTracker by Kathrin & Andi</p>
-            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -237,6 +241,9 @@
 
     <!-- Charts -->
     <script src="js/chart.js/Chart.min.js"></script>
+
+    <!-- Bootstrap Toggle -->
+    <script src="js/bootstrap-toggle.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="js/datatable.js"></script>
