@@ -2,6 +2,7 @@ var _config = require('./config.js')
 var _sqllite3 = require('sqlite3').verbose()
 var _md5 = require('md5');
 const config = require('./config.js');
+var _utils = require('./utils.js');
 
 
 module.exports = {
@@ -31,28 +32,7 @@ module.exports = {
         }
         return lv_part;
     },
-    /**
-    * Getting the time of the JavaScript Date.
-    * @param {Date} oJsDate The Date.
-    * @return: The converted Date as an integer value.
-    */
-    getIntegerTime: function(oJSDate){
-      if(oJSDate !== undefined && (oJSDate instanceof Date))
-        return oJSDate.getTime();
-      return 0;
-    },
-    /**
-    * Getting the JavaScript Date Object of an integer value
-    * @param {oIntTime} oIntTime The time as a integer value.
-    * @return: The converted Date object.
-    */
-    getDateObject: function(oIntTime){
-      var lv_do = new Date();
-      if(oIntTime !== undefined){
-        lv_do.setTime(oIntTime);
-      }
-      return lv_do;
-    },
+
     /**
     * Opens the database connection.
     * @return: The open database connection.
@@ -85,8 +65,8 @@ module.exports = {
           console.log("--oTopic       ------ " + oTopic);
           console.log("--oUser       ------ " + oUser);
           console.log("--oJsDate      ------ " + oJSDate);
-          console.log("--IntegerTime  ------ " + getIntegerTime(oJsDate) );
-          lv_db.run(lv_qry,[oTopic,oUser,oStart,getIntegerTime(oJsDate)]);
+          console.log("--IntegerTime  ------ " + _utils.getIntegerTime(oJsDate) );
+          lv_db.run(lv_qry,[oTopic,oUser,oStart,_utils.getIntegerTime(oJsDate)]);
           this.closeDBConnection(lv_db);
           lv_successfully = true;
         }

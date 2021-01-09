@@ -4,16 +4,31 @@ const app = express()
 const ts = require('./trackerService.js')
 const port = 3000
 const path = require('path')
+const config = require('./config.js');
+const utils = require('./utils.js');
 
 app.use(express.static('public'))
+app.use(express.static('./'))
+app.use('/Frontend_Timetracker',express.static(__dirname+'/Frontend_Timetracker'))
+app.use('/css',express.static(__dirname+'/Frontend_Timetracker/css'))
+app.use('/js',express.static(__dirname+'/Frontend_Timetracker/js'))
+
 app.post('/sample',(req, res) => {
   console.log("some action");
 })
 
+app.get('/loadDashboardTimes',(req, res) => {
+  var times = { "break": utils.convertMinutesValueToFormat(parseInt(config.app.breakTime)),
+                "breakMinutes": config.app.breakTime,
+                "workTime" : utils.convertMinutesValueToFormat(parseInt(config.app.workTime)),
+                "workTImeMinutes": config.app.workTime};
+  res.json(times)
+})
 
 app.get('/', (req, res) => {
   // sending the html page
-  res.sendFile(path.join(__dirname+ '/public/test.html'))
+  //res.sendFile(path.join(__dirname+ '/public/test.html'))
+  res.sendFile(path.join(__dirname+'/Frontend_Timetracker/TimeTracker_front_dashboard.html'))
 })
 
 app.get('/start',(req, res) => {

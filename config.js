@@ -7,5 +7,8 @@ config.db.recTabInsertStart = 'INSERT INTO TimeTrack (TOPIC, USER, START) VALUES
 config.db.recTabUpdateEndEntry = 'UPDATE TimeTrack SET END=? WHERE ID=?';
 config.db.recTabUpdateGenericEntry = 'UPDATE TimeTrack SET COLSVALS WHERE ID=?';
 config.db.recTabSelect = 'SELECT * FROM TimeTrack';
+config.app = {};
+config.app.breakTime = 45;
+config.app.workTime = 444;
 
 module.exports = config;
