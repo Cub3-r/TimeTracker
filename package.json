@@ -1,0 +1,26 @@
+{
+  "name": "timetracking",
+  "version": "1.0.0",
+  "description": "This is just a test on the 29th of december",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andi12344/timeTracking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andi12344/timeTracking/issues"
+  },
+  "homepage": "https://github.com/andi12344/timeTracking#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "md": "^0.6.0",
+    "md5": "^2.3.0",
+    "sqlite3": "^5.0.0"
+  }
+}
