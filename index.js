@@ -5,6 +5,7 @@ const ts = require('./trackerService.js')
 const port = 3000
 const path = require('path')
 const config = require('./config.js');
+const utils = require('./utils.js');
 
 app.use(express.static('public'))
 app.use(express.static('./'))
@@ -17,11 +18,13 @@ app.post('/sample',(req, res) => {
 })
 
 app.get('/loadDashboardTimes',(req, res) => {
-  var times = { "break": config.app.breakTime, "workTime" : config.app.workTime}
+  var times = { "break": utils.convertMinutesValueToFormat(parseInt(config.app.breakTime)),
+                "breakMinutes": config.app.breakTime,
+                "workTime" : utils.convertMinutesValueToFormat(parseInt(config.app.workTime)),
+                "workTImeMinutes": config.app.workTime};
   res.json(times)
-  //res.send('the inserting is finished');
-  console.log(times);
 })
+
 app.get('/', (req, res) => {
   // sending the html page
   //res.sendFile(path.join(__dirname+ '/public/test.html'))
