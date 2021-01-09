@@ -22,7 +22,6 @@ console.log("Intializing the java script coding for node express");
     return result.json();
   }
 
-
 document.addEventListener('DOMContentLoaded', function(oEvent){
   getConfig().then(res => {
     console.log(res);
