@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono");
+
+$charade: #282a37;
+$bluebell: #3399CC;
+$kimberley: #336699;
+$alabaster: #fdfdfd;
+$box-shadow: 0 0.25rem 0.375rem 0 hsla(0, 0%, 0%, 0.4);
+$text-shadow: 0 0.25rem 0.375rem hsla(0, 0%, 0%, 0.2);
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $charade;
+  font-family: "Roboto", sans-serif;
+  color: $alabaster;
+  text-shadow: $text-shadow;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stopwatch {
+  width: 20rem;
+  display: grid;;
+  grid: "timer timer" 5rem
+        "start reset" 3rem
+        / 1fr;
+  background: $bluebell;
+  box-shadow: $box-shadow;
+  text-align: center;
+}
+
+input {
+  display: none;
+}
+
+.start {
+  grid-area: start;
+}
+
+label {
+  line-height: 3rem;
+  background-color: $kimberley;
+  cursor: pointer;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: timer;
+  font-family: "Roboto Mono", monospace;
+  font-size: 3rem;
+  box-shadow: $box-shadow;
+}
+
+.hours,
+.minutes,
+.seconds {
+  &::before {
+    content: "0";
+  }
+  &::after {
+    content: "0";
+  }
+}
+
+#start ~ label[for="start"]::after {
+  content: "Start";
+}
+#start ~ .timer > .hours::before {
+  animation: ones 360000s steps(1) infinite paused;
+}
+#start ~ .timer > .hours::after {
+  animation: ones 36000s steps(1) infinite paused;
+}
+#start ~ .timer > .minutes::before {
+  animation: tens 3600s steps(1) infinite paused;
+}
+#start ~ .timer > .minutes::after {
+  animation: ones 600s steps(1) infinite paused;
+}
+#start ~ .timer > .seconds::before {
+  animation: tens 60s steps(1) infinite paused;
+}
+#start ~ .timer > .seconds::after {
+  animation: ones 10s steps(1) infinite paused;
+}
+
+#start:checked ~ label[for="start"]::after {
+  content: "Stop";
+}
+#start:checked ~ .timer > .hours::before {
+  animation: ones 360000s steps(1) infinite running;
+}
+#start:checked ~ .timer > .hours::after {
+  animation: ones 36000s steps(1) infinite running;
+}
+#start:checked ~ .timer > .minutes::before {
+  animation: tens 3600s steps(1) infinite running;
+}
+#start:checked ~ .timer > .minutes::after {
+  animation: ones 600s steps(1) infinite running;
+}
+#start:checked ~ .timer > .seconds::before {
+  animation: tens 60s steps(1) infinite running;
+}
+#start:checked ~ .timer > .seconds::after {
+  animation: ones 10s steps(1) infinite running;
+}
+
+#reset:active ~ .timer > .hours::before,
+#reset:active ~ .timer > .hours::after,
+#reset:active ~ .timer > .minutes::before,
+#reset:active ~ .timer > .minutes::after,
+#reset:active ~ .timer > .seconds::before,
+#reset:active ~ .timer > .seconds::after {
+  animation: none;
+}
+
+@keyframes tens {
+  0% {
+    content: "0";
+  }
+  16.66666666666667% {
+    content: "1";
+  }
+  33.33333333333333% {
+    content: "2";
+  }
+  50% {
+    content: "3";
+  }
+  66.66666666666667% {
+    content: "4";
+  }
+  83.33333333333333% {
+    content: "5";
+  }
+}
+
+@keyframes ones {
+  0% {
+    content: "0";
+  }
+  10% {
+    content: "1";
+  }
+  20% {
+    content: "2";
+  }
+  30% {
+    content: "3";
+  }
+  40% {
+    content: "4";
+  }
+  50% {
+    content: "5";
+  }
+  60% {
+    content: "6";
+  }
+  70% {
+    content: "7";
+  }
+  80% {
+    content: "8";
+  }
+  90% {
+    content: "9";
+  }
+}
