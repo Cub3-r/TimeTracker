@@ -31,6 +31,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/Frontend_Timetracker/TimeTracker_front_dashboard.html'))
 })
 
+app.get('/timesheet', (req, res) => {
+  // sending the html page
+  //res.sendFile(path.join(__dirname+ '/public/test.html'))
+  res.sendFile(path.join(__dirname+'/Frontend_Timetracker/TimeTracker_front_timesheet.html'))
+})
+
 app.get('/start',(req, res) => {
  var topic = req.param("topic")
  res.send('starting the counter with topic '+ topic)
