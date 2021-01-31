@@ -32,7 +32,27 @@ module.exports = {
         }
         return lv_part;
     },
-
+    /**
+      * Converts the record times of a track entry.
+      * @oJSONResult: The json results
+    **/
+    _convertRecordTimes:function(oJSONResult){
+      if (oJSONResult !== undefined || oJSONResult.length > 0) {
+        // helper method to convert all date time objects
+        var fn_convertDateTime = function(oTimeObject){
+          if (oTimeObject!== undefined || oTimeObject !== null) {
+            return _utils.getDateObject(oTimeObject);
+          }
+          return oTimeObject;
+        };
+          for (var oItmIdx = 0; oItmIdx < oJSONResult.length; oItmIdx++) {
+            oItm = oJSONResult[oItmIdx];
+            oItm['END'] = fn_convertDateTime(oItm['END']);
+            oItm['START'] = fn_convertDateTime(oItm['START']);
+          }
+        return oJSONResult;
+      }
+    },
     /**
     * Opens the database connection.
     * @return: The open database connection.
@@ -80,16 +100,16 @@ module.exports = {
     gettingAllEntries : function (oRes) {
         var lv_db= this.openDBConnection();
         var lv_qry = _config.db.recTabSelect;
+        var that = this;
         lv_db.all(lv_qry,(err,rows)=>{
-            console.log(err);
-            console.log('logical expression ' + (err === null));
             if(err === null || !err){
+              var finalResult =that._convertRecordTimes(rows);
                 oRes.json({
                     "message":"success",
-                    "data":rows
+                    "data":finalResult
                 });
             }
-        });
+        },);
     },
     /**
     * Getting all entries of the table.
