@@ -60,3 +60,7 @@ function exportJSONToExcelFile(oJSONObject,oRowName,oFileName){
         XLSX.writeFile(wb, oFileName);
     }
 }
+
+
+// Additionally functionalities could be an own configurable layout for the export.
+// The next steps would be to create an export Method / JS File for the JSon -> excel
