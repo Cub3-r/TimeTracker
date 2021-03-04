@@ -7,7 +7,6 @@ const path = require('path')
 const config = require('./config.js');
 const utils = require('./utils.js');
 
-app.use(express.static('public'))
 app.use(express.static('./'))
 app.use('/Frontend_Timetracker',express.static(__dirname+'/Frontend_Timetracker'))
 app.use('/css',express.static(__dirname+'/Frontend_Timetracker/css'))
@@ -76,7 +75,30 @@ app.get('/usrs',(req, res) => {
  app.get('/end',(req, res) => {
    ts.endTrack(parseInt("5"));
   })
+,
+// demo for the exporting function
+// https://csvjson.com/json2csv
+app.get('/dummyExport', (req,res) =>{
+  var o = {rows:[{
+              ID      :   "1",
+              Name    :   "Mario",
+              }
+              ,{
+                  ID   :   "2",
+                  Name    :   "Luigi",
+              },
+              {
+                  ID   :   "3",
+                  Name    :   "Toad",
+              },
+              {
+                  ID   :   "4",
+                  Name    :   "Yoshi",
+                  }
+              ]};
+    utils.exportJSONToExcelFile(o,"rows",'meinExport.xlsx')
 
+});
 
 
 app.listen(port, () => {
