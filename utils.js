@@ -69,7 +69,7 @@ module.exports = {
       });
       return finArr;
   },
-  exportJSONToExcelFile: function(oJSONObject, oRowName, oFileName){
+  exportJSONToExcelFile: function(oJSONObject, oRowName, oFileName,res){
     if (oJSONObject === undefined || oRowName === undefined || oFileName === undefined) {
       return;
     }
@@ -83,9 +83,11 @@ module.exports = {
         _xlsx.writeFile(wb, oFileName);
         // hint for creating file https://stackoverflow.com/questions/11944932/how-to-download-a-file-with-node-js-without-using-third-party-libraries
         console.log("finished");
+        return oFileName;
         //var output_file_name = "out.csv";
         //var stream = _xlsx.stream.to_csv(ws);
         //stream.pipe(fs.createWriteStream(output_file_name));
+
     }
   }
 }

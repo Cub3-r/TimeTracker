@@ -19,6 +19,7 @@
   "homepage": "https://github.com/andi12344/timeTracking#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "gyp": "^0.5.0",
     "jquery": "^3.6.0",
     "jsdom": "^16.4.0",

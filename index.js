@@ -6,6 +6,7 @@ const port = 3000
 const path = require('path')
 const config = require('./config.js');
 const utils = require('./utils.js');
+const fs = require('fs');
 
 app.use(express.static('./'))
 app.use('/Frontend_Timetracker',express.static(__dirname+'/Frontend_Timetracker'))
@@ -96,7 +97,10 @@ app.get('/dummyExport', (req,res) =>{
                   Name    :   "Yoshi",
                   }
               ]};
-    utils.exportJSONToExcelFile(o,"rows",'meinExport.xlsx')
+    var fName = utils.exportJSONToExcelFile(o,"rows",'meinExport.xlsx',res);
+    const stream = fs.createReadStream(fName);         // create read stream
+    stream.pipe(res);
+
 
 });
 
