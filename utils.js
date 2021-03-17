@@ -84,8 +84,12 @@ module.exports = {
         // hint for creating file https://stackoverflow.com/questions/11944932/how-to-download-a-file-with-node-js-without-using-third-party-libraries
         console.log("finished");
         return oFileName;
-        //var output_file_name = "out.csv";
-        //var stream = _xlsx.stream.to_csv(ws);
+        /*var output_file_name = "out.csv";
+        var stream = _xlsx.stream.to_csv(ws);
+        res.writeHead(200, {
+            'Content-Type': 'application/msexcel'
+        });
+        stream.pipe(res);*/
         //stream.pipe(fs.createWriteStream(output_file_name));
 
     }

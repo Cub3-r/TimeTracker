@@ -98,9 +98,22 @@ app.get('/dummyExport', (req,res) =>{
                   }
               ]};
     var fName = utils.exportJSONToExcelFile(o,"rows",'meinExport.xlsx',res);
-    const stream = fs.createReadStream(fName);         // create read stream
-    stream.pipe(res);
 
+    // the following commands are needed to configure the response type and set the stream as well
+    const stream = fs.createReadStream(fName);         // create read stream
+    res.writeHead(200, {
+        'Content-Type': 'application/msexcel',
+        'Content-Length': fs.statSync(fName).size
+    });
+    stream.pipe(res);
+    // the deletion of the File on filesysyem - async
+    // how to --> https://flaviocopes.com/how-to-remove-file-node/
+    try {
+      fs.unlinkSync(fName);
+      //file removed
+    } catch(err) {
+      console.error(err);
+    }
 
 });
 
