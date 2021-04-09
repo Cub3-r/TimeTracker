@@ -92,3 +92,36 @@ document.addEventListener('DOMContentLoaded', function(oEvent){
   }
 
 }, false);
+
+// logic of the export from the html table
+function doExport(oCurrentTableExport){
+  var viewTableExport = oCurrentTableExport === undefined? false:oCurrentTableExport;
+  var lv_req_path = 'csvExport';
+
+  if (viewTableExport) {
+    // building up the json object and set append it on the request
+    // you need a empty object and use the index to append a new value, therefore each object needs to be an own array
+
+    // getting the different properties, which are listed in the th tags
+    var properties = [];
+    Object.values($("#timeRecTable").find("th")).forEach(oObj => {if(oObj.innerText !== undefined)properties.push(oObj.innerText)});
+
+    var tabJson = {rows:[]};
+    var rowJson = {};
+    var lastIdx = 0;
+    Object.values($("#timeRecTable").find("td")).forEach((oObj)=>{
+      if(lastIdx !== $($(oObj).parent()).index()){
+        // verify if the rowJson has entries
+        if(Object.keys(rowJson).length > 0)
+          tabJson.rows.push(rowJson);
+        // at first reset the currently values of the json
+        rowJson = {};
+        lastIdx = ($(oObj).parent()).index();
+      }
+      rowJson[properties[$(oObj).index()]] = oObj.innerText;
+    });
+  }
+  // do the request
+  // ajax call?
+
+}
