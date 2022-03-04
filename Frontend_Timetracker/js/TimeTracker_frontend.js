@@ -94,9 +94,9 @@ document.addEventListener('DOMContentLoaded', function(oEvent){
 }, false);
 
 // logic of the export from the html table
-function doExport(oCurrentTableExport){
+async function doExport(oCurrentTableExport){
   var viewTableExport = oCurrentTableExport === undefined? false:oCurrentTableExport;
-  var lv_req_path = 'csvExport';
+  var lv_req_path = '/csvExport';
 
   if (viewTableExport) {
     // building up the json object and set append it on the request
@@ -120,6 +120,27 @@ function doExport(oCurrentTableExport){
       }
       rowJson[properties[$(oObj).index()]] = oObj.innerText;
     });
+
+    var uploadReq = await fetch(lv_req_path,{method:'POST',headers: {'Accept': 'application/json',    'Content-Type': 'application/json'  }, body: JSON.stringify(tabJson)});
+    //await fetch(lv_req_path,{method: 'POST',headers: { 'Accept': 'application/json', 'Content-Type': 'application/json'},body: JSON.stringify({h : 'blubb'})});
+
+    // getting the blobb
+    var genBlob = await uploadReq.blob();
+    var exportBlob = new Blob([genBlob]);
+    var exportUrl = window.URL.createObjectURL(exportBlob);
+
+    var fn_getFileName = function(oReq){
+        if (oReq !== null || oReq !== undefined){
+          return oReq.headers.get("Content-Disposition").split(";")[1].replace("filename=","");
+        }
+    };
+    var exportLink = document.createElement('a');
+    exportLink.href = exportUrl;
+    exportLink.setAttribute('download',fn_getFileName(uploadReq));
+    document.body.appendChild(exportLink);
+    exportLink.click();
+    exportLink.parentNode.removeChild(exportLink);
+    window.URL.revokeObjectURL(genBlob);
   }
   // do the request
   // ajax call?

@@ -7,11 +7,31 @@ const path = require('path')
 const config = require('./config.js');
 const utils = require('./utils.js');
 const fs = require('fs');
+const bodyParser = require('body-parser')
+const jsonParser = bodyParser.json()
+const urlencodedParser = bodyParser.urlencoded({extended: true})
 
+// needed for the json bordy parser --. https://github.com/raynos/body
+app.use(bodyParser.json())
 app.use(express.static('./'))
 app.use('/Frontend_Timetracker',express.static(__dirname+'/Frontend_Timetracker'))
 app.use('/css',express.static(__dirname+'/Frontend_Timetracker/css'))
 app.use('/js',express.static(__dirname+'/Frontend_Timetracker/js'))
+
+/*app.use(function( req, res, next ) {
+  var data = '';
+  req.on('data', function( chunk ) {
+    data += chunk;
+  });
+  req.on('end', function() {
+    req.rawBody = data;
+    console.log( 'on end: ', data )
+    if (data && data.indexOf('{') > -1 ) {
+      req.body = JSON.parse(data);
+    }
+    next();
+  });
+});*/
 
 app.post('/sample',(req, res) => {
   console.log("some action");
@@ -76,6 +96,43 @@ app.get('/usrs',(req, res) => {
  app.get('/end',(req, res) => {
    ts.endTrack(parseInt("5"));
   })
+,
+app.post('/csvExport', (req,res) => {
+  ///https://stackoverflow.com/questions/4295782/how-to-process-post-data-in-node-js
+  // get the json object of the Request
+//  console.log(req)
+  console.log(req.body)
+  var body = req.body
+  // using the utils js
+  console.log('received data ' + body);
+
+  console.log('received data as string ' + JSON.stringify(body));
+
+  var tabJson = body;
+  console.log(tabJson);
+  var fileName = 'timeExport'+ utils.getDateString(utils.getDateObject()) + '.xlsx';
+  var fName = utils.exportJSONToExcelFile(tabJson,"rows",fileName,res);
+  const stream = fs.createReadStream(fName);
+
+  res.writeHead(200, {
+      'Content-Disposition': 'attachment;filename=' + fName,
+      'Content-Type': 'application/msexcel',
+      'Content-Length': fs.statSync(fName).size
+  });
+  stream.pipe(res);
+
+// To use the download function is also be possible, but you have to comment out setting the header and also the removing of the unlinkSync
+//  res.download(fName);
+
+  // the deletion of the File on filesysyem - async
+  // how to --> https://flaviocopes.com/how-to-remove-file-node/
+  try {
+    fs.unlinkSync(fName);
+    //file removed
+  } catch(err) {
+    console.error(err);
+  }
+})
 ,
 // demo for the exporting function
 // https://csvjson.com/json2csv

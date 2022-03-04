@@ -24,6 +24,16 @@ module.exports = {
     return lv_do;
   },
   /**
+  * Getting the date string of the Date Object.
+  * @param {Date} oJsDate The Date.
+  * @return: The converted Date as an String value.
+  **/
+  getDateString: function(oJSDate){
+    if(oJSDate !== undefined && (oJSDate instanceof Date))
+      return oJSDate.toISOString().slice(0, 10);
+    return "";
+  },
+  /**
   * Converts the value of minutes into the local format date.
   * @param {Integer} oIntTime
   * @return: The minutes in a convert local formated date
